@@ -9,12 +9,15 @@ public class ResponsePanel extends JPanel {
     private String modelName;
     private String waitTime;
     private String response;
+    private String status;
 
     public ResponsePanel(String name) {
         modelName = name;
         waitTime = "";
         response = "";
+        status = "WAITING";
         setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
+
         updatePanel();
     }
 
@@ -29,8 +32,11 @@ public class ResponsePanel extends JPanel {
 
         JLabel nameLabel = new JLabel(modelName);
         add(nameLabel);
+        JLabel statusLabel = new JLabel(status);
+        add(statusLabel);
         JLabel waitLabel = new JLabel(waitTime);
         add(waitLabel);
+
         JTextArea responseArea = new JTextArea(response);
         //these define how the responseArea interacts
         //cannot be edited by user
@@ -39,7 +45,9 @@ public class ResponsePanel extends JPanel {
         responseArea.setLineWrap(true);
         //moves whole the world to next line instead of part of one
         responseArea.setWrapStyleWord(true);
-        add(responseArea);
+        //add(responseArea);
+        JScrollPane scrollPane = new JScrollPane(responseArea);
+        add(scrollPane);
 
         revalidate();
         repaint();
@@ -55,5 +63,9 @@ public class ResponsePanel extends JPanel {
 
     public void setResponse(String response) {
         this.response = response;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

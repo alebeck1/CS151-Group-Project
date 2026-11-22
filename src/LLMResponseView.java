@@ -10,7 +10,7 @@
 public class LLMResponseView implements ModelObserver {
     private final String modelString;
     private ResponsePanel panel;
-    private QuerySession model;
+    private final QuerySession model;
 
     /**
      * Constructor, makes an LLMResponseView for the specified LLM.
@@ -32,7 +32,13 @@ public class LLMResponseView implements ModelObserver {
         if (response != null) {
             panel.setModelName(response.getModelName());
             panel.setResponse(response.getText());
-            panel.setWaitTime(response.getStatus().toString());
+            panel.setStatus(response.getStatus().toString());
+            if (response.getStatus() == ResponseStatus.SUCCESS) {
+                panel.setWaitTime(response.getResponseTimeMs() + " ms");
+            }
+            else {
+                panel.setWaitTime("");
+            }
             panel.updatePanel();
         }
 
