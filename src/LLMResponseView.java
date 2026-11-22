@@ -1,5 +1,5 @@
 /**
- * (CorndogCat/Alexander Fleming) - How this LLMResponseView interacts with the
+ * (CorndogCat/Alexander Fleming/Micael Colon) - How this LLMResponseView interacts with the
  * swing components seems a little vague. So I've made the assumption that
  * the LLMResponseView has a Jpanel that it updates and the main view class will
  * hold the LLMResponseViews.
@@ -9,10 +9,12 @@
  * */
 public class LLMResponseView implements ModelObserver {
     private final String modelString;
+    private final QuerySession session;
     private ResponsePanel panel;
 
     public LLMResponseView(String modelString) {
         this.modelString = modelString;
+        this.session = new QuerySession();
         panel = new ResponsePanel(modelString);
     }
 
