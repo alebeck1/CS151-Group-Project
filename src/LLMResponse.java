@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 /**
  * @version 1.0
  * @author Alexander Fleming
@@ -40,5 +42,30 @@ public class LLMResponse {
 
     public String getErrorMessage() {
         return errorMessage;
+    }
+
+    @Override
+    public String toString() {
+        return modelName + " " + text + " " + status + " " + responseTimeMs + " " + errorMessage;
+    }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LLMResponse that = (LLMResponse) o;
+        if (responseTimeMs != that.responseTimeMs) return false;
+        if (modelName != null ? !modelName.equals(that.modelName) : that.modelName != null)
+            return false;
+        if (text != null ? !text.equals(that.text) : that.text != null)
+            return false;
+        if (status != null ? !status.equals(that.status) : that.status != null)
+            return false;
+        if (errorMessage != null ? !errorMessage.equals(that.errorMessage) : that.errorMessage != null)
+            return false;
+        return true;
+    }
+    @Override
+    public int hashCode() {
+        return Objects.hash(modelName, text, status, responseTimeMs, errorMessage);
     }
 }
