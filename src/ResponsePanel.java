@@ -15,6 +15,7 @@ public class ResponsePanel extends JPanel {
         waitTime = "";
         response = "";
         setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
+        updatePanel();
     }
 
     /**
